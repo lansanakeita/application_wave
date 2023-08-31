@@ -1,0 +1,124 @@
+﻿@model IEnumerable<wave_application.Models.OfEncours>
+
+@{
+    ViewData["Title"] = "Suivi OF";
+}
+
+<h1>Historique des Composants  pour l'assemblage</h1>
+
+<p>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Retour</a>
+    <a id="filtre" class="btn btn-primary" data-toggle="modal" data-target="@("#ModalDate")">Filtre</a>
+</p>
+<div class="table-responsive" id="table">
+    <table class="table table-bordered table-striped">
+    <thead class="text-center">
+        <tr>
+            <th>
+               N° Composant
+            </th>
+            <th>
+                N° Carton
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tremie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OfAssemblage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArticleAssemblage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Operateur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            
+            <th>Modifier</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfComposant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CartonComposant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tremie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfAssemblage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleAssemblage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Operateur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+           
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Modifier</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+<!--  ____________________________________PAGINATION_____________________________________________ -->
+<div id="paginator" class="btn-group">
+    @if (ViewBag.HasPreviousPage)
+    {
+        <a href="@Url.Action("Index", new { page = ViewBag.PageNumber - 1, pageSize = ViewBag.PageSize })" class="page-link">Précédent</a>
+    }
+
+    @if (ViewBag.PageNumber > 1)
+    {
+        <a href="@Url.Action("Index", new { page = 1, pageSize = ViewBag.PageSize })" class="page-link">1</a>
+    }
+
+    @if (ViewBag.PageNumber > 5)
+    {
+        <span class="ellipsis">...</span>
+    }
+
+    @for (int i = Math.Max(1, ViewBag.PageNumber - 3); i <= Math.Min(ViewBag.PageNumber + 3, ViewBag.TotalPages); i++)
+    {
+        if (i != 1 && i != ViewBag.TotalPages)
+        {
+            if (i == ViewBag.PageNumber)
+            {
+                <span class="page-link current">@i</span>
+            }
+            else
+            {
+                <a href="@Url.Action("Index", new { page = i, pageSize = ViewBag.PageSize })" class="page-link">@i</a>
+            }
+        }
+    }
+
+    @if (ViewBag.PageNumber < ViewBag.TotalPages - 4)
+    {
+        <span class="ellipsis">...</span>
+    }
+
+    @if (ViewBag.PageNumber < ViewBag.TotalPages)
+    {
+        <a href="@Url.Action("Index", new { page = ViewBag.TotalPages, pageSize = ViewBag.PageSize })" class="page-link">@ViewBag.TotalPages</a>
+    }
+
+    @if (ViewBag.HasNextPage)
+    {
+        <a href="@Url.Action("Index", new { page = ViewBag.PageNumber + 1, pageSize = ViewBag.PageSize })" class="page-link">Suivant</a>
+    }
+</div>
+
+<!--  ___________________________________FIN PAGINATION_______________________________________________________________________ -->
+@await Html.PartialAsync("ModalDate")

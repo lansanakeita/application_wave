@@ -1,0 +1,15 @@
+INSERT INTO Users(Prenom, Nom, Code)
+VALUES ('Lansana', 'keita', '123');
+
+INSERT INTO Users(Prenom, Nom, Code, Email)
+VALUES ('Lansana', 'KEITA', '123', 'lansana@ggmail.com'),
+ ('Nico', 'ROLSHAUSEN', '1234', 'nico@ggmail.com'),
+  ('Lansana2', 'KEITA', '1235', 'lansana2@ggmail.com');
+
+UPDATE Users
+SET Prenom = 'Nico', Nom = 'ROLSHAUSEN', Code = '01234'
+WHERE Id = 1;
+
+UPDATE Users
+SET Email = 'lansanakeita@berryglobal.com'
+WHERE Id = 1;

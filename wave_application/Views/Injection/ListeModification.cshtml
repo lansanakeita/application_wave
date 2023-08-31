@@ -1,0 +1,120 @@
+﻿@model IEnumerable<wave_application.Models.BackupInjection>
+
+@{
+    ViewData["Title"] = "ListeModification";
+}
+
+<h1>Liste des Modifications</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Index">Retour</a>
+</p>
+<table class="table table-bordered table-striped">
+    <thead class="text-center">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Of)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Carton)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinPalette)
+            </th>
+            <th>
+               Modifié par
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Motif)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Of)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Article)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Carton)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinPalette)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Operateur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Motif)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<!--  ____________________________________PAGINATION_____________________________________________ -->
+<div id="paginator" class="btn-group">
+    @if (ViewBag.HasPreviousPage)
+    {
+        <a href="@Url.Action("ListeModification", new { page = ViewBag.PageNumber - 1, pageSize = ViewBag.PageSize })" class="page-link">Précédent</a>
+    }
+
+    @if (ViewBag.PageNumber > 1)
+    {
+        <a href="@Url.Action("ListeModification", new { page = 1, pageSize = ViewBag.PageSize })" class="page-link">1</a>
+    }
+
+    @if (ViewBag.PageNumber > 5)
+    {
+        <span class="ellipsis">...</span>
+    }
+
+    @for (int i = Math.Max(1, ViewBag.PageNumber - 3); i <= Math.Min(ViewBag.PageNumber + 3, ViewBag.TotalPages); i++)
+    {
+        if (i != 1 && i != ViewBag.TotalPages)
+        {
+            if (i == ViewBag.PageNumber)
+            {
+                <span class="page-link current">@i</span>
+            }
+            else
+            {
+                <a href="@Url.Action("ListeModification", new { page = i, pageSize = ViewBag.PageSize })" class="page-link">@i</a>
+            }
+        }
+    }
+
+    @if (ViewBag.PageNumber < ViewBag.TotalPages - 4)
+    {
+        <span class="ellipsis">...</span>
+    }
+
+    @if (ViewBag.PageNumber < ViewBag.TotalPages)
+    {
+        <a href="@Url.Action("ListeModification", new { page = ViewBag.TotalPages, pageSize = ViewBag.PageSize })" class="page-link">@ViewBag.TotalPages</a>
+    }
+
+    @if (ViewBag.HasNextPage)
+    {
+        <a href="@Url.Action("ListeModification", new { page = ViewBag.PageNumber + 1, pageSize = ViewBag.PageSize })" class="page-link">Suivant</a>
+    }
+</div>
+
+<!--  ___________________________________FIN PAGINATION_______________________________________________________________________ -->

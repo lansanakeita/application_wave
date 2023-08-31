@@ -1,0 +1,43 @@
+﻿
+@model wave_application.Models.Reimpression
+
+@{
+    ViewData["Title"] = "Réimpression";
+}
+
+<h1>Réimpression de l'étiquette</h1>
+
+<hr />
+<div class="row" id="formulaireS">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Of" class="control-label"></label>
+                <input asp-for="Of" class="form-control" required/>
+                <span asp-validation-for="Of" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Carton" class="control-label"></label>
+                <input asp-for="Carton" class="form-control" required />
+                <span asp-validation-for="Carton" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Operateur" class="control-label"></label>
+                <input asp-for="Operateur" class="form-control" required autocomplete="off" />
+                <span asp-validation-for="Operateur" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Commentaire" class="control-label"></label>
+                <input asp-for="Commentaire" class="form-control" required />
+                <span asp-validation-for="Commentaire" class="text-danger"></span>
+            </div>
+            <div id="buttonForm">
+                <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Retour</a>
+                <input type="submit" value="Impression" class="btn btn-primary"/>
+            </div>
+            
+        </form>
+    </div>
+</div>

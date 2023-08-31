@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Historiques";
+}
+
+
+<div class="container">
+    <div id="menu2">
+        <a class="btn btn-primary" asp-controller="Assemblage" asp-action="Index">Assemblages</a>
+        <a class="btn btn-primary" asp-controller="Injection" asp-action="Index">Injections</a>
+        <a class="btn btn-primary" asp-controller="Imprimante" asp-action="Index">Imprimantes</a>
+        <a class="btn btn-primary" asp-controller="Qualite" asp-action="Index">Qualites</a>
+        
+        <div class="dropdown" id="dropdown1">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">Réimpression</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" asp-controller="Reimpression" asp-action="Create">Etiquette</a>
+                <a class="dropdown-item" asp-controller="Reimpression" asp-action="Index">Historiques </a>
+            </div>
+        </div>
+        <a class="btn btn-primary" asp-controller="OfEncours" asp-action="Index">Suivi OF</a>
+        <a class="btn btn-primary" asp-controller="Tremie" asp-action="Liste">Trémies</a>
+        <a class="btn btn-primary" asp-controller="User" asp-action="Index">Utilisateurs</a>
+    </div>
+
+    <div id="paraf">
+        @if (TempData["AlertSuccess"] != null)
+        {
+            <div class="alert alert-success">
+                <strong>Succès : </strong>@TempData["AlertSuccess"]
+            </div>
+        }
+
+        @if (TempData["AlertMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                <strong>Erreur : </strong>@TempData["AlertMessage"]
+            </div>
+        }
+        <fieldset>
+            <legend>Avertissement...</legend>
+            <p>
+                Bienvenue sur l'espace d'administration de l'application, ici vous avez la possibilité d'effectuer plusieurs actions sur l'historique comme Créer, Modifier ou encore Supprimer.
+                <br><br>
+                Veuillez prêter attention aux actions effectuées pour maintenir le fonctionnement correct de l'application...
+            </p>
+        </fieldset>
+    </div>
+</div>

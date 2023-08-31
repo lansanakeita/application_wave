@@ -1,0 +1,66 @@
+﻿@model wave_application.Models.User
+
+@{
+    ViewData["Title"] = "Création";
+}
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Erreur</strong>@TempData["AlertMessage"]
+    </div>
+}
+<link rel="stylesheet" href="~/css/style.css" />
+
+<h1>Création de l'utilisateur</h1>
+
+<hr />
+<main class="container">
+    <div class="row" id="formulaireS">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Prenom" class="control-label"></label>
+                    <input asp-for="Prenom" class="form-control" />
+                    <span asp-validation-for="Prenom" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nom" class="control-label"></label>
+                    <input asp-for="Nom" class="form-control" />
+                    <span asp-validation-for="Nom" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Code" class="control-label"></label>
+                    <input asp-for="Code" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="Code" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" type="email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Role" class="control-label" for="selectList">Choisissez un rôle</label>
+                    <select id="selectList" name="selectList" class="form-control">
+                        <option value="Autre">Autre</option>
+                        <option value="Opérateur" selected>Opérateur</option>
+                        <option value="Qualité">Qualité</option> 
+                    </select>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+                <div id="buttonForm">
+                    <a class="btn btn-primary" asp-action="Index">Retour</a>
+                    <input type="submit" value="Valider" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</main>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

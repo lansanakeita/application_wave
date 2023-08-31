@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Changement";
+    
+    var libelles = ViewBag.Libelle as SelectList;
+}
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Erreur : </strong>@TempData["AlertMessage"]
+    </div>
+}
+@if (TempData["SuccesMessage"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Succès : </strong>@TempData["SuccesMessage"]
+    </div>
+}
+<h1>Changement de délai</h1>
+
+<hr />
+<div class="row" id="formulaireS">
+    <div class="col-md-6">
+
+        <form asp-action="ChangeDelay">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label class="control-label">Libellés des composant </label>
+                <select class="form-select" id="selectLibelle" name="selectLibelle">
+                    @foreach (var libelle in libelles)
+                    {
+                        <option value="@libelle.Text">@libelle.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Nouveau délai </label>
+                <select class="form-select" id="selectDelai" name="selectDelai">
+                    <option value="12">12</option>
+                    <option value="24">24</option>
+                    <option value="48">48</option>
+                    <option value="72">72</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Code Opérateur</label>
+                <input  class="form-control" autocomplete="off" id="operateur" name="operateur"/>
+            </div>
+
+            <div id="buttonForm">
+                <a class="btn btn-primary" href="/">Retour</a>
+                <button type="submit" name="action" value="ChangementDelai" class="btn btn-primary">Valider</button>
+            </div>
+        </form>
+       
+    </div>
+</div>

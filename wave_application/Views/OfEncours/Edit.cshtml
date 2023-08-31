@@ -1,0 +1,54 @@
+﻿@model wave_application.Models.OfEncours
+
+@{
+    ViewData["Title"] = "Modification";
+}
+
+<h1>Modification de l'OF encours d'utilisation</h1>
+
+<hr />
+<div class="row" id="formulaireS">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="OfComposant" class="control-label"></label>
+                <input asp-for="OfComposant" class="form-control" />
+                <span asp-validation-for="OfComposant" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CartonComposant" class="control-label"></label>
+                <input asp-for="CartonComposant" class="form-control" />
+                <span asp-validation-for="CartonComposant" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tremie" class="control-label"></label>
+                <input asp-for="Tremie" class="form-control" />
+                <span asp-validation-for="Tremie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OfAssemblage" class="control-label"></label>
+                <input asp-for="OfAssemblage" class="form-control" />
+                <span asp-validation-for="OfAssemblage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArticleAssemblage" class="control-label"></label>
+                <input asp-for="ArticleAssemblage" class="form-control" />
+                <span asp-validation-for="ArticleAssemblage" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Operateur" class="form-control" hidden/>
+                <input asp-for="Date" class="form-control" hidden />
+            </div>
+          
+            <div id="buttonForm">
+                <a class="btn btn-primary" asp-action="Index">Retour</a>
+                <input type="submit" value="Valider" class="btn btn-primary" /> 
+            </div>
+        </form>
+    </div>
+    
+</div>
+

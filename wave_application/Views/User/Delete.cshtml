@@ -1,0 +1,46 @@
+﻿@model wave_application.Models.User
+
+@{
+    ViewData["Title"] = "Supprimer";
+}
+
+<h2>Êtes-vous sûr de vouloir supprimer l'utilisateur ?</h2>
+
+<hr />
+<div class="row" id="formulaireS">
+    <div class="col-md-6">
+        <form asp-action="Delete">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Prenom" class="control-label"></label>
+                <input asp-for="Prenom" class="form-control" readonly/>
+                <span asp-validation-for="Prenom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nom" class="control-label"></label>
+                <input asp-for="Nom" class="form-control" readonly />
+                <span asp-validation-for="Nom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Code" class="control-label"></label>
+                <input asp-for="Code" class="form-control" readonly />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" readonly />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                <input asp-for="Role" class="form-control" readonly />
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div id="buttonForm">
+                <a asp-action="Index" class="btn btn-primary" >Retour</a>
+                <input type="submit" value="Supprimer" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>

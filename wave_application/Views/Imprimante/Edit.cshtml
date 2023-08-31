@@ -1,0 +1,33 @@
+﻿@model wave_application.Models.Imprimante
+
+@{
+    ViewData["Title"] = "Modification";
+}
+
+<h1>Modification </h1>
+
+<hr />
+<div class="row" id="formulaireS">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="NomPc" class="control-label"></label>
+                <input asp-for="NomPc" class="form-control" />
+                <span asp-validation-for="NomPc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomImprimante" class="control-label"></label>
+                <input asp-for="NomImprimante" class="form-control" />
+                <span asp-validation-for="NomImprimante" class="text-danger"></span>
+            </div>
+             <div id="buttonForm">
+                <a class="btn btn-primary" asp-asp-controller="Imprimante" asp-action="Index">Retour</a>
+                <input type="submit" value="Valider" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

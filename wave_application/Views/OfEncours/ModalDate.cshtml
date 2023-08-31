@@ -1,0 +1,45 @@
+﻿
+
+<!-- Modal -->
+<div class="modal fade" id="ModalDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Remplir les champs</h3>
+                   
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span> 
+                </button>
+            </div>
+           
+            <div class="modal-body">
+                <form method="post" action="@Url.Action("ReplaceData", "OfEncours")">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label class="control-label">N° OF ou Article</label>
+                        <input class="form-control" name="mot"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label  class="control-label">Début date</label>
+                        <input type="date" class="form-control" name="dateDebut"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Fin date</label>
+                        <input type="date" class="form-control" name="dateFin" />
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <input type="submit" value="Valider" class="btn btn-primary"/>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

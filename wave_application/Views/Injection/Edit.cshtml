@@ -1,0 +1,87 @@
+﻿@model wave_application.Models.Injection
+
+@{
+    ViewData["Title"] = "Modification";
+}
+
+<h1>Modification</h1>
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Erreur : </strong>@TempData["AlertMessage"]
+    </div>
+}
+<hr />
+<div class="row" id="formulaireS">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Of" class="control-label"></label>
+                <input asp-for="Of" class="form-control" autocomplete="off" min="0"/>
+                <input class="form-control" hidden id="ofInjection" value="@Model.Of" name="ofInjection" />
+                <span asp-validation-for="Of" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Article" class="control-label"></label>
+                <input asp-for="Article" class="form-control" min="0" />
+                <input class="form-control" hidden id="articleInjection" value="@Model.Article" name="articleInjection" />
+                <span asp-validation-for="Article" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Quantite" class="control-label"></label>
+                <input asp-for="Quantite" class="form-control" min="0" />
+                <input class="form-control" hidden id="quantiteInjection" value="@Model.Quantite" name="quantiteInjection" />
+                <span asp-validation-for="Quantite" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <label asp-for="Carton" class="control-label"></label>
+                <input asp-for="Carton" class="form-control" min="0" />
+                <input class="form-control" hidden id="cartonInjection" value="@Model.Carton" name="cartonInjection" />
+                <span asp-validation-for="Carton" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Opérateur</label>
+                <input class="form-control" value="" id="operator" name="operator" required autocomplete="off" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Motif </label>
+                <textarea class="form-control" cols="20" rows="3" id="motif" name="motif" required></textarea>
+            </div>
+
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" asp-for="FinPalette">
+                <label asp-for="FinPalette" class="form-check-label"></label>
+            </div>
+
+            <!----------- ICI LES CHAMPS CACHES------------>
+            <div class="form-group">
+                <input asp-for="Operateur" class="form-control" hidden/>
+                <input asp-for="Palette" class="form-control" hidden />
+                <input asp-for="Emplacement" class="form-control" hidden />
+                <input asp-for="Bloquer" class="form-control" hidden />
+                <input asp-for="Supprimer" class="form-control" hidden />
+                <input asp-for="Delai" class="form-control" hidden />
+                <input asp-for="Date" class="form-control" hidden />
+                <input asp-for="Libelle" class="form-control" hidden />
+            </div>
+            <!---------FIN DES CHAMPS CACHES------------>
+           
+            <div id="buttonForm">
+                <a class="btn btn-primary" asp-action="Index" class="btn btn-primary">Retour</a>
+                <input type="submit" value="Valider" class="btn btn-primary" />
+                <input hidden class="form-control" value="@Model.FinPalette" name="finInjection" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

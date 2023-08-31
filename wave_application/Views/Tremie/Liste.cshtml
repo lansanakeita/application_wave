@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Tremies";
+}
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Erreur : </strong>@TempData["AlertMessage"]
+    </div>
+}
+
+@if (TempData["AlertSuccess"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Succès : </strong>@TempData["AlertSuccess"]
+    </div>
+}
+<h1>Liste des trémies avec les composants associés</h1>
+
+<p>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Retour</a>
+    <a asp-action="Create" class="btn btn-primary" data-toggle="modal" data-target="@("#Create")">Nouveau </a>
+    <a class="btn btn-primary" asp-action="ListeModify">Modification</a>
+</p>
+<table class="table table-bordered table-striped">
+    <thead class="text-center">
+        <tr>
+            <th>
+                N° Trémie
+            </th>
+            <th>
+                N° OF Composant
+            </th>
+            <th>
+                Code Article
+            </th>
+
+            <th>
+                N° OF Assemblage
+            </th>
+            <th>
+                Externe
+            </th>
+
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var item in ViewData["data"] as IList<Tremie>)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroTremie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OfComposant)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodeArticle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OfAssemblage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Externe)
+                </td>
+
+            </tr> 
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"> </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+@await Html.PartialAsync("Create")

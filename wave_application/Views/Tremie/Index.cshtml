@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Tremies";
+}
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Erreur : </strong>@TempData["AlertMessage"]
+    </div>
+}
+
+@if (TempData["AlertSuccess"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Succès : </strong>@TempData["AlertSuccess"]
+    </div>
+}
+<h1>Liste des trémies avec les composants associés</h1>
+
+<p id="p">
+    <form method="post">
+        <a class="btn btn-primary" asp-controller="Verify" asp-action="Verify">Retour</a>
+        <input type="submit" value="Fin OF" class="btn btn-primary" asp-controller="Tremie" asp-action="EndOf" />
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="@("#NextOf")">
+            OF Suivant
+        </button>
+    </form>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead class="text-center">
+        <tr>
+            <th>
+                N° Trémie 
+            </th>
+            <th>
+                N° OF Composant / Lot
+            </th>
+            <th>
+                Code Article
+            </th>
+            <th>
+                N° OF Assemblage 
+            </th>
+            <th>
+                Externe
+            </th>
+            <th>Modiffier</th>
+            <th>Remplir</th>
+            <th>Vider</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var item in ViewData["data"] as IList<Tremie>)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroTremie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfComposant) 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodeArticle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfAssemblage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Externe)
+            </td>
+           
+            <td>
+                <a asp-route-id="@item.Id" data-toggle="modal" data-target="@("#Edit-"+item.Id)" data-url="@Url.Action($"Edit/{item.Id}")">Modifier</a>
+                @await Html.PartialAsync("Edit", item)
+            </td>
+                <td>
+                    @if (item.OfAssemblage != 0)
+                    {
+                        <a asp-route-id="@item.Id" data-toggle="modal" data-target="@("#Filling-"+item.Id)" data-url="@Url.Action($"Filling/{item.Id}")">Remplir</a>
+                        @await Html.PartialAsync("Filling", item)
+                    }
+                   
+                </td>
+            <td>
+                @if (item.OfAssemblage != 0)
+                {
+                    <a asp-route-id="@item.Id" data-toggle="modal" data-target="@("#Empty-"+item.Id)" data-url="@Url.Action($"Empty/{item.Id}")">Vide de chaîne</a>
+                    @await Html.PartialAsync("Empty", item)
+                }
+            </td> 
+        </tr>
+}
+    </tbody>
+</table>
+@section Scripts {
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"> </script>
+    <script src="~/js/tremie.js" asp-append-version="true"></script>
+    
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+@await Html.PartialAsync("NextOf")

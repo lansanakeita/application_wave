@@ -1,0 +1,4 @@
+<STX><SI>C0<ETX>
+<STX><SI>S50<ETX>
+<STX><SI>I9<ETX>
+<STX><BS><ETX>                                                                                                                       

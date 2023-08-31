@@ -1,0 +1,25 @@
+"use strict";
+let inputs = document.getElementById('formulaire').elements;
+let cpt=0;
+
+  /******************* fonction * *****************/
+function faireTabulation(champActuelId) {
+    let current = document.getElementById(champActuelId);
+    if (current.value.length === 2) {
+        current.disabled = true;
+        cpt++;
+        inputs[cpt].focus();
+    }
+}
+
+function getValue() {
+    console.log(inputs[cpt].value);
+    let x = [];
+    //x.push(event.);
+}
+
+window.addEventListener('load', () => {
+    inputs[0].focus();
+});
+
+

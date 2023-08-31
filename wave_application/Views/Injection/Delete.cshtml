@@ -1,0 +1,88 @@
+﻿@model wave_application.Models.Injection
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Êtes-vous sûr de vouloir supprimer ceci ? </h1>
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Erreur : </strong>@TempData["AlertMessage"]
+    </div>
+}
+<hr />
+<div class="row" id="formulaireS">
+    <div class="col-md-6">
+        <form asp-action="Delete">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Of" class="control-label"></label>
+                <input asp-for="Of" class="form-control" />
+                <input class="form-control" hidden id="ofInjection" value="@Model.Of" name="ofInjection" />
+                <span asp-validation-for="Of" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Article" class="control-label"></label>
+                <input asp-for="Article" class="form-control" />
+                <input class="form-control" hidden id="articleInjection" value="@Model.Article" name="articleInjection" />
+                <span asp-validation-for="Article" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Carton" class="control-label"></label>
+                <input asp-for="Carton" class="form-control" />
+                <input class="form-control" hidden id="cartonInjection" value="@Model.Carton" name="cartonInjection" />
+                <span asp-validation-for="Carton" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="Palette" class="control-label"></label>
+                <input asp-for="Palette" class="form-control" />
+                <input class="form-control" hidden id="paletteInjection" value="@Model.Palette" name="paletteInjection" />
+                <span asp-validation-for="Palette" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantite" class="control-label"></label>
+                <input asp-for="Quantite" class="form-control" />
+                <input class="form-control" hidden id="quantiteInjection" value="@Model.Quantite" name="quantiteInjection" />
+                <span asp-validation-for="Quantite" class="text-danger"></span>
+            </div>
+           
+             <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" hidden class="form-control" />
+                <input asp-for="Date" class="form-control" disabled />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Operateur" class="control-label"></label>
+                <input asp-for="Operateur" hidden class="form-control" />
+                <input class="form-control" value="" id="operator" name="operator" required />
+                <span asp-validation-for="Operateur" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Motif </label>
+                <textarea class="form-control" cols="20" rows="2" id="motif" name="motif" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="FinPalette" hidden class="form-control" />
+                <input hidden class="form-control" value="@Model.FinPalette" name="finInjection" />
+                <span asp-validation-for="FinPalette" class="text-danger"></span>
+            </div>
+            
+            <div id="buttonForm">
+                <a asp-action="Index" class="btn btn-primary">Retour</a>
+                <input type="submit" value="Supprimer" class="btn btn-danger" />
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Emplacement" hidden class="form-control" />
+                <input asp-for="Delai" hidden class="form-control" />
+                <input asp-for="Libelle" hidden class="form-control" />
+            </div>
+        </form>
+    </div>
+</div>
+

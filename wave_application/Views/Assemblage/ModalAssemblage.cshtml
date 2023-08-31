@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Confirmation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+</head>
+<body>
+    <div id="myModal" class="modal">
+        <h3>Confirmation</h3>
+        <h3>Le contenant sera enregistré avec une fin de palette, confirmez-vous?</h3>
+        <form method="post" action="@Url.Action("ModalAssemblage")">
+            <button type="submit" name="response" value="OK" class="primary">Oui</button>
+            <button type="submit" name="response" value="NonOK">Non</button>
+            <button type="submit" name="response" value="Annuler">Annuler</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#myModal').modal({
+                showClose: false,
+                clickClose: false,
+                escapeClose: false
+            });
+        });
+    </script>
+</body>
+</html>

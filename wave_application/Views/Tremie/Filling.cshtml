@@ -1,0 +1,62 @@
+﻿@model wave_application.Models.Tremie
+
+<!-- Modal -->
+<div class="modal fade" id="Filling-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Remplissage de la trémie</h3>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form asp-action="Filling" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input type="hidden" asp-for="Id" />
+                        <label asp-for="NumeroTremie" class="control-label"></label>
+                        <input asp-for="NumeroTremie" class="form-control" hidden />
+                        <input asp-for="NumeroTremie" class="form-control" disabled />
+                        <span asp-validation-for="NumeroTremie" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="OfComposant" class="control-label">OF Composant / Lot</label>
+                        <input asp-for="OfComposant" class="form-control" hidden/>
+                        <input asp-for="OfComposant" class="form-control" disabled/>
+                        <span asp-validation-for="OfComposant" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">N° Code barre / Lot + Carton</label>
+                        <input type="text" id="carton" name="carton" class="form-control" required autocomplete="off" />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Operateur" class="control-label"></label>
+                        <input asp-for="Operateur" class="form-control" value="" required autocomplete="off" />
+                        <span asp-validation-for="Operateur" class="text-danger"></span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <input type="submit" value="Valider" class="btn btn-primary" />
+                    </div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label" id="externe">
+                            <input class="form-check-input" asp-for="Externe" name="externe" disabled/> Composant Externe
+                            <input class="form-check-input" asp-for="Externe" name="externe" hidden />
+                        </label>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

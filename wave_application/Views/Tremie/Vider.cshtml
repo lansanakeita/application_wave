@@ -1,0 +1,69 @@
+﻿@model wave_application.Models.Tremie
+
+<!-- Modal -->
+<div class="modal fade" id="Vider-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                  <h3 class="modal-title" id="externe">Est-vous sûr de vouloir vider la trémie ?</h3>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form asp-action="Vider" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input type="hidden" asp-for="Id" />
+                        <label asp-for="NumeroTremie" class="control-label"></label>
+                        <input asp-for="NumeroTremie" class="form-control" disabled />
+                        <input class="form-control" hidden id="numTremie" value="@Model.NumeroTremie" name="numero" />
+                        <span asp-validation-for="NumeroTremie" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="OfComposant" class="control-label"></label>
+                        <input asp-for="OfComposant" class="form-control" autocomplete="off" />
+                        <input class="form-control" hidden value="@Model.OfComposant" name="composantOf"  />
+                        <span asp-validation-for="OfComposant" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="OfAssemblage" class="control-label"></label>
+                        <input asp-for="OfAssemblage" class="form-control" autocomplete="off" />
+                        <input class="form-control" hidden value="@Model.OfAssemblage" name="assemblageOf"  />
+                        <span asp-validation-for="OfAssemblage" class="text-danger"></span>
+                    </div>
+
+                     <div class="form-group">
+                        <input class="form-control" hidden value="@Model.ArticleAssemblage" name="assemblageArticle" />
+                        <span asp-validation-for="ArticleAssemblage" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Operateur" class="control-label"></label>
+                        <input asp-for="Operateur" class="form-control" value="" autocomplete="off" />
+                        <input class="form-control" hidden value="@Model.Operateur" name="operator" required />
+                        <span asp-validation-for="Operateur" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-check">
+                       
+                        <label class="form-check-label" hidden id="externe">
+                            <input class="form-check-input" hidden value="@Model.Externe" name="composantExterne" /> Composant Externe ?
+                        </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <input type="submit" value="Valider" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

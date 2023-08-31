@@ -1,0 +1,81 @@
+﻿@model wave_application.Models.Injection
+
+@{
+    ViewData["Title"] = "Accueil";
+}
+@if (TempData["AlertSuccess"] != null || TempData["SuccesMessage"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Succès : </strong>@TempData["AlertSuccess"]
+    </div>
+}
+
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-danger" id="message">
+        <strong>Erreur : </strong>@TempData["AlertMessage"]
+    </div>
+}
+
+<div id="home">
+    <div id="menu">
+        <div class="dropdown" id="dropdown1">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">Assemblage</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="Tremie/Index">Gestion des trémies</a>
+                <a class="dropdown-item" type="button" href="" data-toggle="modal" data-target="@("#ModalAssemblage")">Déclaration de production </a>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" id="none" d-md-block data-toggle="modal" data-target="@("#ModalInjection")">Injection</button>
+        <button type="button" class="btn btn-primary" id="none" d-md-block data-toggle="modal" data-target="@("#ModalHistorique")">Historique</button>
+        <div class="dropdown" id="dropdown1">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">Qualité</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" asp-controller="Qualite" asp-action="BlockPalette">Bloquer une palette</a>
+                <a class="dropdown-item" asp-controller="Qualite" asp-action="ChangeDelay">Changer le délai</a>
+                <a class="dropdown-item" asp-controller="Qualite" asp-action="UnlockPalette">Débloquer une palette </a>
+            </div>
+        </div>
+        <a class="btn btn-primary" asp-controller="Verify" asp-action="VerifyPalette">Vérification 24H</a>
+    </div>
+    <div clsass="imgHome">
+        <img src="~/img/berry-logo.png" alt="berry" id="imgHome" />
+    </div>
+</div>
+
+<!-- ________________________________________________________________________________________________________-->
+@section Scripts {
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"> </script>
+    <script>
+
+        var strValue = "@((string)ViewBag.mssg)";
+        var echecValue = "@((string)ViewBag.echec)";
+        var operateurValue = "@((string)ViewBag.operateur)";
+        var DatasValue = "@((string)ViewBag.datas)";
+        var AutorisationValue = "@((string)ViewBag.autorisation)";
+        if (strValue !== null && strValue !== '') {
+            swal("Palette Valide", "Vous pouvez l'utiliser !", "success");
+        }
+        if (echecValue !== null && echecValue !== '') {
+            swal("Palette Non-Valide", "Le délai minimal de 24H n'est pas respecté !", "error");
+        }
+        if (operateurValue !== null && operateurValue !== '') {
+            swal("Erreur dans les informations saisies!", "", "error");
+        }
+        if (DatasValue !== null && DatasValue !== '') {
+            swal("Le N° OF / N° Carton est incorrect ! ", "", "error");
+        }
+        if (AutorisationValue !== null && AutorisationValue !== '') {
+            swal("Vous n'etes pas autorisé pour cette page ! ", "", "error");
+        }
+    </script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@await Html.PartialAsync("ModalInjection")
+@await Html.PartialAsync("ModalHistorique")
+@await Html.PartialAsync("ModalAssemblage")

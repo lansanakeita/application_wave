@@ -1,0 +1,88 @@
+﻿@model IEnumerable<wave_application.Models.OfEncours>
+
+@{
+    ViewData["Title"] = "Suivi OF";
+}
+@if (TempData["AlertSuccess"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Succès : </strong>@TempData["AlertSuccess"]
+    </div>
+}
+<h1>Historique des composants utilisés </h1>
+
+<p>
+    <a class="btn btn-primary"  asp-action="Index">Retour</a>
+    @if (Model != null && Model.Count() > 0)
+    {
+        <a href="@Url.Action("TelechargerPdf", "OfEncours")"> <img src="~/img/document-pdf.svg" id="pdf" /></a>
+    }
+</p>
+@if (Model != null && Model.Count() > 0)
+{
+    <table class="table table-bordered table-striped">
+        <thead class="text-center">
+            <tr>
+                <th>
+                    N° Composant
+                </th>
+                <th>
+                    N° Carton
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tremie)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OfAssemblage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ArticleAssemblage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Operateur)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+
+                <th>Modifier</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OfComposant)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CartonComposant)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tremie)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OfAssemblage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArticleAssemblage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Operateur)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Modifier</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h1> La liste est vide</h1>
+}

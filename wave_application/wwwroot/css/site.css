@@ -1,0 +1,275 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+.container #table {
+    width: 100%;
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+#verify{
+    margin-top:50px;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+/**Style pour le logo */
+#imgLogo {
+    width: 250px;
+    height: 180px;
+    margin-top: -30px;
+    margin-bottom: -30px;
+    margin-left:-40px;
+}
+/**Fin*/
+
+/** Les buttons */
+.btn {
+    width: 120px;
+    text-align: center;
+    font-weight: bold;
+    text-align:center;
+    
+}
+#btn, #update {
+    text-align: center;
+    margin-left: 50px;
+}
+#liste, #liste2 {
+    width: 140px;
+    text-align: center;
+    margin-left: 50px;
+}
+#dropdown1, #dropdown2 {
+    display: inline;
+}
+
+#formulaireS {
+    /*background-color:aliceblue;*/
+    justify-content: center;
+    background-color: aliceblue;
+}
+
+#buttonForm {
+    text-align: center;
+    justify-content: space-evenly;
+    display: flex;
+    align-items: center;
+    margin-bottom:20px;
+}
+#loadingIndicator {
+    text-align: center;
+    font-weight: bold;
+    justify-content: center;
+}
+h1 {
+    text-align: center;
+    color: #1861ac;
+}
+
+
+/****** case a cocher *******/
+#externe{
+    color:red;
+    font-size:larger;
+}
+
+label {
+    float :left;
+    font-size:large;
+}
+
+/** Balise P*/
+#p {
+    display: inline-block
+}
+
+#pdf {
+    margin-left: 15px;
+    width: 40px;
+    height: 50px;
+    color: #1861ac;
+}
+#filtre{
+    color:white;
+}
+
+/** Pour la pagination ***/
+.page-link {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 2px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #333;
+    border-radius: 5px;
+    color: #1b6ec2;
+}
+
+.current {
+    font-weight: bold;
+}
+
+
+
+/** Menu Accueil ***/
+#home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+#menu {
+    background-color: #1861ac;
+    height: 600px;
+    width: 350px;
+    border-radius: 5%;
+    text-align: center;
+    float: left;
+    margin-top:50px;
+}
+
+#menu .btn {
+    margin-top: 45px;
+    margin-bottom: 30px;
+    width: 200px;
+    text-align: center;
+    color: #1861ac;
+    background-color: white;
+}
+#menu2 {
+    margin-top: 80px;
+    background-color: #1861ac;
+    height: 650px;
+    width: 350px;
+    border-radius: 5%;
+    text-align: center;
+    float: left;
+}
+#menu2 .btn {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    width: 200px;
+    text-align: center;
+    color: #1861ac;
+    background-color: white;
+}
+
+#imgHome {
+    float: right;
+    height:600px;
+    margin-left:120px;
+    margin-top:60px;
+}
+
+#paraf {
+    float: right;
+    width:750px;
+    height:100px;
+    margin-top:300px;
+}
+#paraf p {
+    margin-top: 10px;
+    font-size: larger;
+    text-align: justify;
+    font-weight: 600;
+}
+legend {
+    background-color: #1861ac;
+    color: #fff;
+    padding: 3px 6px;
+    font-size: larger;
+    font-weight: 600;
+}
+
+
+@media (max-width:900px) {
+    body {
+        position: absolute;
+    }
+
+    #menu {
+        height: 600px;
+        width: 350px;
+        margin-top:100px;
+    }
+
+    #menu2 {
+        margin-top: 80px;
+        height: 650px;
+    }
+
+    #imgHome {
+        visibility: hidden;
+    }
+    #paraf {
+        visibility: hidden;
+    }
+
+    #boutonHome a {
+        margin-top: 45%;
+    }
+}

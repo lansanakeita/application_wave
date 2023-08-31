@@ -1,0 +1,87 @@
+﻿@model wave_application.Models.Assemblage
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<h1>Êtes-vous sûr de vouloir supprimer ceci ? </h1>
+@if (TempData["AlertMessage"] != null)
+{
+        <div class="alert alert-danger">
+            <strong>Erreur : </strong>@TempData["AlertMessage"]
+        </div>
+}
+<hr />
+<div class="row" id="formulaireS">
+    <div class="col-md-6">
+        <form asp-action="Delete">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Of" class="control-label"></label>
+                <input asp-for="Of" class="form-control" />
+                <input class="form-control" hidden id="ofAs" value="@Model.Of" name="ofAs" />
+                <span asp-validation-for="Of" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Article" class="control-label"></label>
+                <input asp-for="Article" class="form-control" />
+                <input class="form-control" hidden id="articleAs" value="@Model.Article" name="articleAs" />
+                <span asp-validation-for="Article" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantite" class="control-label"></label>
+                <input asp-for="Quantite" class="form-control" />
+                <input class="form-control" hidden id="quantiteAs" value="@Model.Quantite" name="quantiteAs" />
+                <span asp-validation-for="Quantite" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Carton" class="control-label"></label>
+                <input asp-for="Carton" class="form-control" />
+                <input class="form-control" hidden id="cartonAs" value="@Model.Carton" name="cartonAs" />
+                <span asp-validation-for="Carton" class="text-danger"></span>
+            </div>
+           
+           
+            <div class="form-group">
+                <label asp-for="Palette" class="control-label"></label>
+                <input asp-for="Palette" class="form-control" />
+                <input class="form-control" hidden id="paletteAs" value="@Model.Palette" name="paletteAs" />
+                <span asp-validation-for="Palette" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" hidden/>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Opérateur</label>
+                <input asp-for="Operateur" hidden class="form-control" />
+                <input class="form-control" value="" id="operator" name="operator" required />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Motif </label>
+                <textarea class="form-control" cols="20" rows="2" id="motif" name="motif" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="FinPalette" class="form-control" hidden/>
+                <span asp-validation-for="FinPalette" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="FinOf" class="form-control" hidden />
+                <span asp-validation-for="FinOf" class="text-danger"></span>
+            </div>
+
+            <div id="buttonForm">
+                <a asp-action="Index" class="btn btn-primary">Retour</a>
+                <input type="submit" value="Valider" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+

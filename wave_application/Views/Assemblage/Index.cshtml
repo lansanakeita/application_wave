@@ -1,0 +1,155 @@
+﻿@model IEnumerable<wave_application.Models.Assemblage>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Historique de l'assemblage</h1>
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-danger">
+        <strong>Erreur : </strong>@TempData["AlertMessage"]
+    </div>
+}
+@if (TempData["AlertSuccess"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Succès : </strong>@TempData["AlertSuccess"] 
+    </div>
+}
+
+<p>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Retour</a>
+    <a class="btn btn-primary" asp-action="ListeModify">Modification</a>
+    <a id="filtre" class="btn btn-primary" data-toggle="modal" data-target="@("#ModalDate")">Filtre</a>
+</p>
+
+<div class="table-responsive" id="table">
+    <table class="table table-bordered table-striped"> 
+        <thead class="text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Of)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Article)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantite)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Carton)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Operateur)
+                </th>
+           
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FinPalette)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FinOf)
+                </th>
+           
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Of)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Article)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantite)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Carton)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Operateur)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FinPalette)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FinOf)
+                    </td>
+           
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Modifier</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<!--  ____________________________________PAGINATION_____________________________________________ -->
+
+<div id="paginator" class="btn-group">
+    @if (ViewBag.HasPreviousPage)
+    {
+        <a href="@Url.Action("Index", new { page = ViewBag.PageNumber - 1, pageSize = ViewBag.PageSize })" class="page-link">Précédent</a>
+    }
+
+    @if (ViewBag.PageNumber > 1)
+    {
+        <a href="@Url.Action("Index", new { page = 1, pageSize = ViewBag.PageSize })" class="page-link">1</a>
+    }
+
+    @if (ViewBag.PageNumber > 5)
+    {
+        <span class="ellipsis">...</span>
+    }
+
+    @for (int i = Math.Max(1, ViewBag.PageNumber - 3); i <= Math.Min(ViewBag.PageNumber + 3, ViewBag.TotalPages); i++)
+    {
+        if (i != 1 && i != ViewBag.TotalPages)
+        {
+            if (i == ViewBag.PageNumber)
+            {
+                <span class="page-link current">@i</span>
+            }
+            else
+            {
+                <a href="@Url.Action("Index", new { page = i, pageSize = ViewBag.PageSize })" class="page-link">@i</a>
+            }
+        }
+    }
+
+    @if (ViewBag.PageNumber < ViewBag.TotalPages - 4)
+    {
+        <span class="ellipsis">...</span>
+    }
+
+    @if (ViewBag.PageNumber < ViewBag.TotalPages)
+    {
+        <a href="@Url.Action("Index", new { page = ViewBag.TotalPages, pageSize = ViewBag.PageSize })" class="page-link">@ViewBag.TotalPages</a>
+    }
+
+    @if (ViewBag.HasNextPage)
+    {
+        <a href="@Url.Action("Index", new { page = ViewBag.PageNumber + 1, pageSize = ViewBag.PageSize })" class="page-link">Suivant</a>
+    }
+</div>
+
+<!--  ___________________________________FIN PAGINATION_______________________________________________________________________ -->
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@await Html.PartialAsync("ModalDate")

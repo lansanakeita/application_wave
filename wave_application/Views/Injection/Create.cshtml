@@ -1,0 +1,84 @@
+﻿@model wave_application.Models.Injection
+
+@{
+    ViewData["Title"] = "Composant";
+}
+@if (ViewBag.ShowDialog == true)
+{
+    <div id="dialog" title="Boîte de dialogue">
+        <p>Voulez-vous appliquer une Fin de palette @ViewBag.Action ?</p>
+    </div>
+}
+<h1>Déclaration du composant et Impression de l'étiquette</h1>
+
+<hr />
+
+<div class="row" id="formulaireS">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Create", "Injection", FormMethod.Post))
+        {
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group"> 
+                <label asp-for="Of" class="control-label"></label>
+                <input asp-for="Of" class="form-control" id="of" autocomplete="off" />
+                <span asp-validation-for="Of" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Article" class="control-label">N° Article JDE</label>
+                <input asp-for="Article" class="form-control" min="0" required autocomplete="off" />
+                <span asp-validation-for="Article" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantite" class="control-label">Quantité par contenant</label>
+                <input asp-for="Quantite" class="form-control" min="0" />
+                <span asp-validation-for="Quantite" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Carton" class="control-label"></label>
+                <input asp-for="Carton" class="form-control" hidden />
+                <input class="form-control" value="Valeur automatique" disabled="disabled" />
+                <span asp-validation-for="Carton" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Operateur" class="control-label"></label>
+                <input asp-for="Operateur" class="form-control" id="operateur" hidden value="@ViewData["User"]" />
+                <input asp-for="Operateur" class="form-control" disabled="disabled" value="@ViewData["User"]" />
+                <span asp-validation-for="Operateur" class="text-danger"></span>
+            </div>
+            <div id="buttonForm">
+                <a class="btn btn-primary" href="/">Retour</a>
+                <button type="submit" name="action" value="Creation" class="btn btn-primary">Impression + Validation</button>
+                <button type="submit" name="action" value="FinPalette" class="btn btn-primary">FinPalette + Validation</button>
+            </div>
+
+            
+            <div id="loadingIndicator" style="display: none;">
+                <i class="fa fa-spinner fa-spin"></i> Traitement en cours...
+            </div>
+            
+            
+       }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var strValue = "@((string)ViewBag.mssg)";
+        if (strValue !== null && strValue !== '') {
+            swal("Le code opérateur invalide désolé", "", "error");
+        }
+
+        // Vérifier si la variable existe et soumettre le formulaire
+        $(document).ready(function () {
+            var maVariable = "@((string)ViewBag.affichage)";
+            if (maVariable) {
+                $('form').submit();
+            }
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

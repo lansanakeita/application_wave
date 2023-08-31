@@ -1,0 +1,106 @@
+﻿@model IEnumerable<wave_application.Models.User>
+
+@{
+    ViewData["Title"] = "Liste";
+}
+
+<h1>Liste des Utilisateurs </h1>
+
+<p>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Retour</a>
+    <a asp-action="Create" class="btn btn-primary ">Nouveau </a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead class="text-center">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Prenom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+          
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+
+             <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prenom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+          
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td class="text-center">
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<!--  ____________________________________PAGINATION_____________________________________________ -->
+<div id="paginator" class="btn-group">
+    @if (ViewBag.HasPreviousPage)
+    {
+        <a href="@Url.Action("Index", new { page = ViewBag.PageNumber - 1, pageSize = ViewBag.PageSize })" class="page-link">Précédent</a>
+    }
+
+    @if (ViewBag.PageNumber > 1)
+    {
+        <a href="@Url.Action("Index", new { page = 1, pageSize = ViewBag.PageSize })" class="page-link">1</a>
+    }
+
+    @if (ViewBag.PageNumber > 5)
+    {
+        <span class="ellipsis">...</span>
+    }
+
+    @for (int i = Math.Max(1, ViewBag.PageNumber - 3); i <= Math.Min(ViewBag.PageNumber + 3, ViewBag.TotalPages); i++)
+    {
+        if (i != 1 && i != ViewBag.TotalPages)
+        {
+            if (i == ViewBag.PageNumber)
+            {
+                <span class="page-link current">@i</span>
+            }
+            else
+            {
+                <a href="@Url.Action("Index", new { page = i, pageSize = ViewBag.PageSize })" class="page-link">@i</a>
+            }
+        }
+    }
+
+    @if (ViewBag.PageNumber < ViewBag.TotalPages - 4)
+    {
+        <span class="ellipsis">...</span>
+    }
+
+    @if (ViewBag.PageNumber < ViewBag.TotalPages)
+    {
+        <a href="@Url.Action("Index", new { page = ViewBag.TotalPages, pageSize = ViewBag.PageSize })" class="page-link">@ViewBag.TotalPages</a>
+    }
+
+    @if (ViewBag.HasNextPage)
+    {
+        <a href="@Url.Action("Index", new { page = ViewBag.PageNumber + 1, pageSize = ViewBag.PageSize })" class="page-link">Suivant</a>
+    }
+</div>
+
+<!--  ___________________________________FIN PAGINATION_______________________________________________________________________ -->
